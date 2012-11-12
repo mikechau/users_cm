@@ -1,2 +1,3 @@
-Bugs:
-11-12-12: Fix user index, requires account to login, nil breaks because there is no session, have it redirect to login page.
+[BUG] - 11-12-12: Fix user index, requires account to login, nil breaks because there is no session, have it redirect to login page.
+[FIX] - 11-12-12: Logout was broken, entered "destroy" instead of "delete" for http method. Revised to reflect this change.
+[FIX] - 11-12-12: Fixed user index issue, now checks for session[:user_id] cookie, if user attempts to access /users/index.html.erb and the cookie does not exist they will be redirected to the login page which is new_session_url. 

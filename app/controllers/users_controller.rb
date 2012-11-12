@@ -1,14 +1,18 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+
   def index
     @users = User.all
 
-    @username = User.find_by_id(session[:user_id]).username
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+    if session[:user_id] != nil #check for session[:user_id] cookie
+      @username = User.find_by_id(session[:user_id]).username #create instanced var with the username pulled from session[:user_id]
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: @users }
+        end
+    else
+      redirect_to new_session_url #if it can't find the session[:user_id] cookie redirect to login page
     end
   end
 
