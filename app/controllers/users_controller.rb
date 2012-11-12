@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
+    @username = User.find_by_id(session[:user_id]).username
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -44,7 +46,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        session[:user_id] = @user.id
+        format.html { redirect_to users_url, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
