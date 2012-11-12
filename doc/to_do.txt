@@ -1,0 +1,2 @@
+Bugs:
+11-12-12: Fix user index, requires account to login, nil breaks because there is no session, have it redirect to login page.
